@@ -19,14 +19,15 @@ public class Data {
     ArrayList ExportationCodeList = new ArrayList();
     
     public void Data(ArrayList Exports){
-        
+        System.out.println(Exports.size());
         for(int i = 0; i<Exports.size();i++){
             ArrayList aux = (ArrayList) Exports.get(i);
-            DestinationCountryList = (ArrayList) aux.get(0);
-            OriginalDeparmentList = (ArrayList) aux.get(1);
-            TransportationRouteList = (ArrayList) aux.get(2);
-            ExportationCodeList = (ArrayList) aux.get(3);
+            DestinationCountryList.add(aux.get(0));
+            OriginalDeparmentList.add(aux.get(1));
+            TransportationRouteList.add(aux.get(2));
+            ExportationCodeList.add(aux.get(3));
         } 
+        System.out.println(DestinationCountryList.size());
         
     }
 

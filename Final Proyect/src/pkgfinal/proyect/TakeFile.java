@@ -20,11 +20,16 @@ public class TakeFile {
         ArrayList FileData = new ArrayList();
         try(Scanner ScanFile = new Scanner(FileStudents)){
             while (ScanFile.hasNextLine()){
-                ArrayList Values = Columns(ScanFile.nextLine()); 
-                FileData.add(Values.get(3));
-                FileData.add(Values.get(6));
-                FileData.add(Values.get(7));
-                FileData.add(Values.get(9));
+                ArrayList aux = new ArrayList();
+                ArrayList Values = Columns(ScanFile.nextLine());
+                if(Values.size()>=29){
+                    aux.add(Values.get(3));
+                    aux.add(Values.get(6));
+                    aux.add(Values.get(7));
+                    aux.add(Values.get(10));
+                    FileData.add(aux);
+                    System.out.println(FileData.size()+"\n\n");
+                }
             }
         }
         return FileData;
@@ -33,12 +38,11 @@ public class TakeFile {
     public ArrayList Columns(String Row){
         ArrayList Columns = new ArrayList();
         try(Scanner RowScanner = new Scanner(Row)){
-            RowScanner.useDelimiter(",");
+            RowScanner.useDelimiter(";");
                 while(RowScanner.hasNext()) {
-                Columns.add((String)RowScanner.next());
+                Columns.add((String) RowScanner.next());
             }
         }
-        System.out.println(Columns);
         return Columns;
     }
     
