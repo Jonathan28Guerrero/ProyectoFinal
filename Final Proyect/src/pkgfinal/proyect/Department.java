@@ -9,6 +9,6 @@ package pkgfinal.proyect;
  *
  * @author daniela
  */
-public class ExportationCode {
+public class Department {
     
 }

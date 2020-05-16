@@ -23,10 +23,10 @@ public class TakeFile {
                 ArrayList aux = new ArrayList();
                 ArrayList Values = Columns(ScanFile.nextLine());
                 if(Values.size()>=29){
+                    aux.add(Values.get(0));
                     aux.add(Values.get(3));
                     aux.add(Values.get(6));
-                    aux.add(Values.get(7));
-                    aux.add(Values.get(10));
+                    aux.add(Values.get(9));
                     FileData.add(aux);
                     System.out.println(FileData.size()+"\n\n");
                 }
