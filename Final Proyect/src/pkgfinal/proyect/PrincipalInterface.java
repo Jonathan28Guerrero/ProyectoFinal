@@ -14,15 +14,17 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+
 /**
  *
  * @author daniela
  */
 public class PrincipalInterface extends javax.swing.JFrame {
     
-    File FileSelected;
-    static ArrayList Exports;
-    TakeFile FileData = new TakeFile();
+    File fileSelected;
+    ArrayList exports;
+    TakeFile fileData = new TakeFile();
+    Data dataExports = new Data();
 
     /**
      * Creates new form PrincipalInterface
@@ -33,21 +35,22 @@ public class PrincipalInterface extends javax.swing.JFrame {
         
     }
     
-    public void ExtractFile(){
+    public final void ExtractFile(){
     
-         JFileChooser SelectFile = new JFileChooser();
+        JFileChooser SelectFile = new JFileChooser();
         FileNameExtensionFilter Filter = new FileNameExtensionFilter("Archvos de texto", "csv");
         SelectFile.setFileFilter(Filter);
         int Result = SelectFile.showOpenDialog(this);
-        FileSelected = SelectFile.getSelectedFile();
+        fileSelected = SelectFile.getSelectedFile();
         
         try {
-           Exports = FileData.CreateListing(FileSelected);
+           exports = fileData.CreateListing(fileSelected);
+           dataExports.Data((exports));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(PrincipalInterface.class.getName()).log(Level.SEVERE, null, ex);
         }
        
-        if((FileSelected==null)||(FileSelected.getName().equals(""))){
+        if((fileSelected==null)||(fileSelected.getName().equals(""))){
             JOptionPane.showMessageDialog(this,"Nombre de archivo invalido");
         }
         
