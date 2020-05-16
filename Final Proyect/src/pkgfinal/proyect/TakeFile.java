@@ -21,10 +21,11 @@ public class TakeFile {
         try(Scanner ScanFile = new Scanner(FileStudents)){
             while (ScanFile.hasNextLine()){
                 ArrayList Values = Columns(ScanFile.nextLine()); 
+                FileData.add(Values.get(2));
+                FileData.add(Values.get(3));
                 FileData.add(Values.get(7));
                 FileData.add(Values.get(6));
                 FileData.add(Values.get(10));
-                FileData.add(Values.get(2));
                 System.out.println(""+FileData);
             }
         }
