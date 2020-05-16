@@ -5,10 +5,42 @@
  */
 package pkgfinal.proyect;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 /**
  *
  * @author daniela
  */
 public class TakeFile {
+    
+    public ArrayList CreateListing(File FileStudents) throws FileNotFoundException{
+        ArrayList FileData = new ArrayList();
+        try(Scanner ScanFile = new Scanner(FileStudents)){
+            while (ScanFile.hasNextLine()){
+                ArrayList Values = Columns(ScanFile.nextLine()); 
+                FileData.add(Values.get(7));
+                FileData.add(Values.get(6));
+                FileData.add(Values.get(10));
+                FileData.add(Values.get(2));
+                System.out.println(""+FileData);
+            }
+        }
+        return FileData;
+    }
+    
+    public ArrayList Columns(String Row){
+        ArrayList Columns = new ArrayList();
+        try(Scanner RowScanner = new Scanner(Row)){
+            RowScanner.useDelimiter(",");
+                while(RowScanner.hasNext()) {
+                Columns.add(RowScanner.next());
+            }
+        }
+        return Columns;
+    }
+    
     
 }
