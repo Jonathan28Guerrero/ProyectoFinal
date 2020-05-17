@@ -17,7 +17,7 @@ public class FilterData {
     public ArrayList Month(int i,ArrayList DataList){
     
         int selection = i;
-        int column = 3;
+        int column = 0;
         if(selection != 0)
             return Filter(selection,column,DataList);
         else
@@ -27,7 +27,7 @@ public class FilterData {
     public ArrayList Deparment(int i,ArrayList DataList){
     
         int selection = 0;
-        int column = 0;
+        int column = 1;
         switch(i) {
                 case 0:
                      break;
@@ -140,7 +140,7 @@ public class FilterData {
     public ArrayList BirthSite(int i,ArrayList DataList){
     
         int selection = 0;
-        int column = 1;
+        int column = 2;
         switch(i) {
                 case 0:
                      break;
@@ -165,7 +165,7 @@ public class FilterData {
     
     public ArrayList Sex(int i,ArrayList DataList){
         int selection = i;
-        int column = 2;
+        int column = 3;
         if(selection != 0)
             return Filter(selection,column,DataList);
         else

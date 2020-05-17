@@ -18,7 +18,8 @@ public class Data {
     ArrayList FilteredData = new ArrayList();
     
     public void Data(ArrayList Births){
-        DataList = Births;   
+        DataList = Births;
+        FilteredData = Births;
     }
     
 
