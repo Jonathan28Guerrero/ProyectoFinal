@@ -28,10 +28,11 @@ public class TakeFile {
                     aux.add(Values.get(3));
                     aux.add(Values.get(5));
                     FileData.add(aux);
-                    System.out.println(FileData.size()+"\n\n");
+                    
                 }
             }
         }
+        System.out.println("Tamaño archivo entrada:" + FileData.size());
         return FileData;
     }
     

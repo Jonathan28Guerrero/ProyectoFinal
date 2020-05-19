@@ -5,7 +5,6 @@
  */
 package pkgfinal.proyect;
 
-import java.awt.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -28,6 +27,7 @@ public class PrincipalInterface extends javax.swing.JFrame {
     TakeFile fileData = new TakeFile();
     Data dataBirths = new Data();
     FilterData filter = new FilterData();
+    int counter = 0;
 
     /**
      * Creates new form PrincipalInterface
@@ -64,12 +64,22 @@ public class PrincipalInterface extends javax.swing.JFrame {
         int Columns = 4;
         Table.setModel(new DefaultTableModel(Rows, Columns));
         Table.setEnabled(false);
-        for(int i=0; i<Rows; i++){
+        if(counter == 0){
+            for(int i=1; i<Rows; i++){
+                ArrayList Row1 = (ArrayList) dataBirths.FilteredData.get(i);
+                for(int a = 0; a<4; a++)
+                    Table.setValueAt(Row1.get(a), i-1, a);
+            }
+        }
+        else{
+            for(int i=0; i<Rows; i++){
             ArrayList Row1 = (ArrayList) dataBirths.FilteredData.get(i);
             for(int a = 0; a<4; a++)
                 Table.setValueAt(Row1.get(a), i, a);
+            }
         }
-         System.out.println("prueba : "+Rows);
+        System.out.println("Tamaño luego de filtrar "+ counter + ": "+ Rows);
+        counter++;
     }
 
     /**
@@ -306,12 +316,14 @@ public class PrincipalInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox6ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        dataBirths.FilteredData = dataBirths.DataList;
+        counter = 0;
+        SetToTable();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void BirthPlaceBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BirthPlaceBoxActionPerformed
         int place = BirthPlaceBox.getSelectedIndex();
-        ArrayList aux = filter.BirthSite(place, dataBirths.FilteredData);
+        ArrayList aux = filter.BirthPlace(place, dataBirths.FilteredData);
         dataBirths.FilteredData = aux;
         SetToTable();
     }//GEN-LAST:event_BirthPlaceBoxActionPerformed
