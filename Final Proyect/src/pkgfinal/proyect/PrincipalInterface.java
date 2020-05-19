@@ -296,7 +296,7 @@ public class PrincipalInterface extends javax.swing.JFrame {
 
     private void SexBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SexBoxActionPerformed
         int sex = SexBox.getSelectedIndex();
-        ArrayList aux = filter.Month(sex, dataBirths.FilteredData);
+        ArrayList aux = filter.Sex(sex, dataBirths.FilteredData);
         dataBirths.FilteredData = aux;
         SetToTable();
     }//GEN-LAST:event_SexBoxActionPerformed
@@ -311,7 +311,7 @@ public class PrincipalInterface extends javax.swing.JFrame {
 
     private void BirthPlaceBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BirthPlaceBoxActionPerformed
         int place = BirthPlaceBox.getSelectedIndex();
-        ArrayList aux = filter.Month(place, dataBirths.FilteredData);
+        ArrayList aux = filter.BirthSite(place, dataBirths.FilteredData);
         dataBirths.FilteredData = aux;
         SetToTable();
     }//GEN-LAST:event_BirthPlaceBoxActionPerformed
@@ -325,7 +325,7 @@ public class PrincipalInterface extends javax.swing.JFrame {
 
     private void DeparmentBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeparmentBoxActionPerformed
         int deparment = DeparmentBox.getSelectedIndex();
-        ArrayList aux = filter.Month(deparment, dataBirths.FilteredData);
+        ArrayList aux = filter.Deparment(deparment, dataBirths.FilteredData);
         dataBirths.FilteredData = aux;
         SetToTable();
     }//GEN-LAST:event_DeparmentBoxActionPerformed
