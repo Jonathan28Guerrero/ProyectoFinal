@@ -16,17 +16,17 @@ import java.util.Scanner;
  */
 public class TakeFile {
     
-    public ArrayList CreateListing(File FileStudents) throws FileNotFoundException{
+    public ArrayList CreateList(File FileStudents, int[] columns) throws FileNotFoundException{
         ArrayList FileData = new ArrayList();
         try(Scanner ScanFile = new Scanner(FileStudents)){
             while (ScanFile.hasNextLine()){
                 ArrayList aux = new ArrayList();
                 ArrayList Values = Columns(ScanFile.nextLine());
                 if(Values.size()>=29){
-                    aux.add(Values.get(9));
-                    aux.add(Values.get(0));
-                    aux.add(Values.get(3));
-                    aux.add(Values.get(5));
+                    aux.add(Values.get(columns[0]));
+                    aux.add(Values.get(columns[1]));
+                    aux.add(Values.get(columns[2]));
+                    aux.add(Values.get(columns[3]));
                     FileData.add(aux);
                     
                 }

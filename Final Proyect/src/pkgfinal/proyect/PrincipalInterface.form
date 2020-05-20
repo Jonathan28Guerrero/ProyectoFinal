@@ -115,8 +115,8 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="BirthPlaceBox" alignment="0" min="-2" pref="81" max="-2" attributes="0"/>
+                          <Component id="BirthPlaceBox" min="-2" pref="81" max="-2" attributes="0"/>
+                          <Component id="jLabel2" min="-2" pref="43" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -230,10 +230,10 @@
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="5">
             <StringItem index="0" value="Seleccionar"/>
-            <StringItem index="1" value="Institucion de salud"/>
+            <StringItem index="1" value="Instituci&#xf3;n de salud"/>
             <StringItem index="2" value="Domicilio"/>
             <StringItem index="3" value="Otro"/>
-            <StringItem index="4" value="Sin informacion"/>
+            <StringItem index="4" value="Sin informaci&#xf3;n"/>
           </StringArray>
         </Property>
       </Properties>
@@ -365,7 +365,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Sitio del parto"/>
+        <Property name="text" type="java.lang.String" value="Sitio"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">

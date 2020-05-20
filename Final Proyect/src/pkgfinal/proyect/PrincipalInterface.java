@@ -28,6 +28,7 @@ public class PrincipalInterface extends javax.swing.JFrame {
     Data dataBirths = new Data();
     FilterData filter = new FilterData();
     int counter = 0;
+    String prueba;
 
     /**
      * Creates new form PrincipalInterface
@@ -39,7 +40,30 @@ public class PrincipalInterface extends javax.swing.JFrame {
     }
     
     public final void ExtractFile(){
-    
+        int[] columns = new int[4];
+        String[] Options = {"Nacimientos","Defunciones", "Defunciones prenatales"};
+        int Value = JOptionPane.showOptionDialog(this, "¿Qué archivo desea analizar?", "Aceptar", WIDTH, HEIGHT, null,
+                Options, Options[0]);
+        switch(Value){
+            case 0:
+                columns[0] =9;
+                columns[1] =0;
+                columns[2] =3;
+                columns[3] =5;
+                break;
+            case 1:
+                columns[0] =7;
+                columns[1] =0;
+                columns[2] =3;
+                columns[3] =10;
+                break;
+            case 2:
+                columns[0] =7;
+                columns[1] =0;
+                columns[2] =3;
+                columns[3] =10;
+                break;
+        }
         JFileChooser SelectFile = new JFileChooser();
         FileNameExtensionFilter Filter = new FileNameExtensionFilter("Archvos de texto", "csv");
         SelectFile.setFileFilter(Filter);
@@ -47,7 +71,7 @@ public class PrincipalInterface extends javax.swing.JFrame {
         fileSelected = SelectFile.getSelectedFile();
         
         try {
-           births = fileData.CreateListing(fileSelected);
+           births = fileData.CreateList(fileSelected, columns);
            dataBirths.Data((births));
            SetToTable();
         } catch (FileNotFoundException ex) {
@@ -132,7 +156,7 @@ public class PrincipalInterface extends javax.swing.JFrame {
             }
         });
 
-        BirthPlaceBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Institucion de salud", "Domicilio", "Otro", "Sin informacion" }));
+        BirthPlaceBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Institución de salud", "Domicilio", "Otro", "Sin información" }));
         BirthPlaceBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BirthPlaceBoxActionPerformed(evt);
@@ -195,7 +219,7 @@ public class PrincipalInterface extends javax.swing.JFrame {
 
         jLabel1.setText("Departamento");
 
-        jLabel2.setText("Sitio del parto");
+        jLabel2.setText("Sitio");
 
         jLabel3.setText("Mes");
 
@@ -249,8 +273,8 @@ public class PrincipalInterface extends javax.swing.JFrame {
                             .addComponent(jLabel1))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(BirthPlaceBox, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(BirthPlaceBox, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
