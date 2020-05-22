@@ -14,6 +14,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartPanel;
 
 
 /**
@@ -23,6 +24,7 @@ import javax.swing.table.DefaultTableModel;
 public class PrincipalInterface extends javax.swing.JFrame {
     
     File fileSelected;
+    Graphics Graphic = new Graphics();
     ArrayList births;
     TakeFile fileData = new TakeFile();
     Data dataBirths = new Data();
@@ -86,6 +88,7 @@ public class PrincipalInterface extends javax.swing.JFrame {
      public void SetToTable(){
         int Rows = dataBirths.FilteredData.size();
         int Columns = 4;
+        ArrayList months = new ArrayList();
         Table.setModel(new DefaultTableModel(Rows, Columns));
         Table.setEnabled(false);
         if(counter == 0){
@@ -93,7 +96,9 @@ public class PrincipalInterface extends javax.swing.JFrame {
                 ArrayList Row1 = (ArrayList) dataBirths.FilteredData.get(i);
                 for(int a = 0; a<4; a++)
                     Table.setValueAt(Row1.get(a), i-1, a);
+                    months.add(Row1.get(0));
             }
+            paint(months);
         }
         else{
             for(int i=0; i<Rows; i++){
@@ -104,6 +109,13 @@ public class PrincipalInterface extends javax.swing.JFrame {
         }
         System.out.println("Tamaño luego de filtrar "+ counter + ": "+ Rows);
         counter++;
+    }
+     public void paint(ArrayList Months){
+    
+    ArrayList List = (ArrayList)Months;
+            ChartPanel chartPanel=new ChartPanel(Graphic.MakeGraphic(List));
+            add(chartPanel);
+            chartPanel.setBounds(470, 80, 450, 400);
     }
 
     /**
