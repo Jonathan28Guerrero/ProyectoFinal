@@ -140,30 +140,18 @@ public class FilterData {
             return DataList;
     }
     
-    public ArrayList BirthPlace(int i,ArrayList DataList){
+    public ArrayList Place(String ValoreSeleccion[] , int i,ArrayList DataList){
     
-        String selection = "0";
+        String selection;
         int column = 2;
-        switch(i) {
-                case 0:
-                     break;
-                case 1:
-                    selection = "1";
-                    break;
-                 case 2:
-                    selection = "2";
-                    break;
-                case 3:
-                    selection = "3";
-                    break;
-                case 4:
-                    selection = "9";
-                    break;
-        }
+        int[] fetales = new int[7];
+        String [] fetales1 = {"0","1","2","3","4","5","6","9"};
+        selection = ValoreSeleccion[i];
         if(!"0".equals(selection))
             return Filter(selection,column,DataList);
         else
             return DataList;
+        
     }
     
     public ArrayList Sex(int i,ArrayList DataList){

@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -29,6 +30,7 @@ public class PrincipalInterface extends javax.swing.JFrame {
     FilterData filter = new FilterData();
     int counter = 0;
     String prueba;
+    int Value = 0;
 
     /**
      * Creates new form PrincipalInterface
@@ -39,10 +41,36 @@ public class PrincipalInterface extends javax.swing.JFrame {
         
     }
     
+    public void seleccionarPelicula(int value) {
+        
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        modelo.addElement("Seleccionar");
+        BirthPlaceBox.setModel(modelo);
+        if(value == 0){
+        modelo.addElement("Institucion de salud");
+        modelo.addElement("Domicilio");
+        modelo.addElement("Otro");
+        modelo.addElement("sin informacion");
+        BirthPlaceBox.setModel(modelo);
+        }
+        if(value == 1 || value == 2){
+        modelo.addElement("Hospital/clínica");
+        modelo.addElement("Centro/puesto de salud");
+        modelo.addElement("Casa/domicilio");
+        modelo.addElement("Lugar de trabajo");
+        modelo.addElement("Vía pública");
+        modelo.addElement("Otro");
+        modelo.addElement("sin informacion");
+        
+        BirthPlaceBox.setModel(modelo);
+        }
+
+
+    }
     public final void ExtractFile(){
         int[] columns = new int[4];
         String[] Options = {"Nacimientos","Defunciones", "Defunciones prenatales"};
-        int Value = JOptionPane.showOptionDialog(this, "¿Qué archivo desea analizar?", "Aceptar", WIDTH, HEIGHT, null,
+        Value = JOptionPane.showOptionDialog(this, "¿Qué archivo desea analizar?", "Aceptar", WIDTH, HEIGHT, null,
                 Options, Options[0]);
         switch(Value){
             case 0:
@@ -73,6 +101,7 @@ public class PrincipalInterface extends javax.swing.JFrame {
         try {
            births = fileData.CreateList(fileSelected, columns);
            dataBirths.Data((births));
+           seleccionarPelicula(Value);
            SetToTable();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(PrincipalInterface.class.getName()).log(Level.SEVERE, null, ex);
@@ -156,7 +185,6 @@ public class PrincipalInterface extends javax.swing.JFrame {
             }
         });
 
-        BirthPlaceBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Institución de salud", "Domicilio", "Otro", "Sin información" }));
         BirthPlaceBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BirthPlaceBoxActionPerformed(evt);
@@ -347,8 +375,16 @@ public class PrincipalInterface extends javax.swing.JFrame {
 
     private void BirthPlaceBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BirthPlaceBoxActionPerformed
         int place = BirthPlaceBox.getSelectedIndex();
-        ArrayList aux = filter.BirthPlace(place, dataBirths.FilteredData);
+        String [] Brirths = {"0","1","2","3","9"};
+        String [] fetales1 = {"0","1","2","3","4","5","6","9"};
+        if(Value == 0){
+        ArrayList aux = filter.BirthPlace(Brirths ,place, dataBirths.FilteredData);
         dataBirths.FilteredData = aux;
+        }
+        else{
+        ArrayList aux = filter.BirthPlace(fetales1 ,place, dataBirths.FilteredData);
+        dataBirths.FilteredData = aux;
+        }
         SetToTable();
     }//GEN-LAST:event_BirthPlaceBoxActionPerformed
 

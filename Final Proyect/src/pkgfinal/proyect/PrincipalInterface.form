@@ -228,13 +228,7 @@
     <Component class="javax.swing.JComboBox" name="BirthPlaceBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="5">
-            <StringItem index="0" value="Seleccionar"/>
-            <StringItem index="1" value="Instituci&#xf3;n de salud"/>
-            <StringItem index="2" value="Domicilio"/>
-            <StringItem index="3" value="Otro"/>
-            <StringItem index="4" value="Sin informaci&#xf3;n"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
       <Events>
