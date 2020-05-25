@@ -5,6 +5,7 @@
  */
 package pkgfinal.proyect;
 
+import java.awt.BorderLayout;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ import org.jfree.chart.JFreeChart;
 public class PrincipalInterface extends javax.swing.JFrame {
     
     File fileSelected;
-    Graphics Graphic = new Graphics();
+    Graphics graphic = new Graphics();
     ArrayList births;
     TakeFile fileData = new TakeFile();
     Data dataBirths = new Data();
@@ -35,6 +36,15 @@ public class PrincipalInterface extends javax.swing.JFrame {
     String prueba;
     int Value = 0;
 
+    //Karla
+    int Tipe;
+    int counter2 = 0;
+    boolean BirthsDeats = false;
+    boolean flagMonths =false;
+    boolean flagDepartments=false;
+    boolean flagPlaces=false;
+    boolean flagSex=false;
+    ChartPanel chartPanel;
     /**
      * Creates new form PrincipalInterface
      */
@@ -44,28 +54,28 @@ public class PrincipalInterface extends javax.swing.JFrame {
         
     }
     
-    public void seleccionarPelicula(int value) {
+    public void selectModel(int value) {
         
-        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
-        modelo.addElement("Seleccionar");
-        BirthPlaceBox.setModel(modelo);
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        model.addElement("Seleccionar");
+        BirthPlaceBox.setModel(model);
         if(value == 0){
-        modelo.addElement("Institucion de salud");
-        modelo.addElement("Domicilio");
-        modelo.addElement("Otro");
-        modelo.addElement("sin informacion");
-        BirthPlaceBox.setModel(modelo);
+        model.addElement("Institucion de salud");
+        model.addElement("Domicilio");
+        model.addElement("Otro");
+        model.addElement("sin informacion");
+        BirthPlaceBox.setModel(model);
         }
         if(value == 1 || value == 2){
-        modelo.addElement("Hospital/clínica");
-        modelo.addElement("Centro/puesto de salud");
-        modelo.addElement("Casa/domicilio");
-        modelo.addElement("Lugar de trabajo");
-        modelo.addElement("Vía pública");
-        modelo.addElement("Otro");
-        modelo.addElement("sin informacion");
+        model.addElement("Hospital/clínica");
+        model.addElement("Centro/puesto de salud");
+        model.addElement("Casa/domicilio");
+        model.addElement("Lugar de trabajo");
+        model.addElement("Vía pública");
+        model.addElement("Otro");
+        model.addElement("sin informacion");
         
-        BirthPlaceBox.setModel(modelo);
+        BirthPlaceBox.setModel(model);
         }
 
 
@@ -104,7 +114,7 @@ public class PrincipalInterface extends javax.swing.JFrame {
         try {
            births = fileData.CreateList(fileSelected, columns);
            dataBirths.Data((births));
-           seleccionarPelicula(Value);
+           selectModel(Value);
            SetToTable();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(PrincipalInterface.class.getName()).log(Level.SEVERE, null, ex);
@@ -118,7 +128,6 @@ public class PrincipalInterface extends javax.swing.JFrame {
      public void SetToTable(){
         int Rows = dataBirths.FilteredData.size();
         int Columns = 4;
-        ArrayList months = new ArrayList();
         Table.setModel(new DefaultTableModel(Rows, Columns));
         Table.setEnabled(false);
         if(counter == 0){
@@ -126,9 +135,7 @@ public class PrincipalInterface extends javax.swing.JFrame {
                 ArrayList Row1 = (ArrayList) dataBirths.FilteredData.get(i);
                 for(int a = 0; a<4; a++)
                     Table.setValueAt(Row1.get(a), i-1, a);
-                    months.add(Row1.get(0));
             }
-            paint(months);
         }
         else{
             for(int i=0; i<Rows; i++){
@@ -139,15 +146,6 @@ public class PrincipalInterface extends javax.swing.JFrame {
         }
         System.out.println("Tamaño luego de filtrar "+ counter + ": "+ Rows);
         counter++;
-    }
-     public void paint(ArrayList Months){
-    
-    ArrayList List = (ArrayList)Months;
-    
-            ChartPanel chartPanel=new ChartPanel(Graphic.MakeGraphic(List));
-            //Graphic.MakeGraphic(List).removeLegend();
-            add(chartPanel);
-            chartPanel.setBounds(470, 80, 450, 400);
     }
 
     /**
@@ -163,18 +161,20 @@ public class PrincipalInterface extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jComboBox1 = new javax.swing.JComboBox<>();
-        DeparmentBox = new javax.swing.JComboBox<>();
+        DepartmentBox = new javax.swing.JComboBox<>();
         BirthPlaceBox = new javax.swing.JComboBox<>();
         MonthBox = new javax.swing.JComboBox<>();
         SexBox = new javax.swing.JComboBox<>();
-        GraphicTipeBox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         Table = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        CleanFilters = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        TipeBox = new javax.swing.JComboBox<>();
+        Panel = new javax.swing.JPanel();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -192,10 +192,10 @@ public class PrincipalInterface extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        DeparmentBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Antioquia", "Atlántico", "Bogotá", "Bolivar", "Boyaca", "Caldas", "Caqueta", "Cauca", "Cesar", "Cordoba", "Cundinamarca", "Choco", "Huila", "La guajira", "Magdalena", "Meta", "Nariño", "Norte de Santander", "Quindio", "Risaralda", "Santander", "Sucre", "Tolima", "Valle del Cauca", "Arauca", "Casanare", "Putumayo", "Archipiélago de San Andrés, Providencia y Santa Catalina", "Amazonas", "Guainía", "Guaviare", "Vaupés", "Vichada" }));
-        DeparmentBox.addActionListener(new java.awt.event.ActionListener() {
+        DepartmentBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Antioquia", "Atlántico", "Bogotá", "Bolivar", "Boyaca", "Caldas", "Caqueta", "Cauca", "Cesar", "Cordoba", "Cundinamarca", "Choco", "Huila", "La guajira", "Magdalena", "Meta", "Nariño", "Norte de Santander", "Quindio", "Risaralda", "Santander", "Sucre", "Tolima", "Valle del Cauca", "Arauca", "Casanare", "Putumayo", "Archipiélago de San Andrés, Providencia y Santa Catalina", "Amazonas", "Guainía", "Guaviare", "Vaupés", "Vichada" }));
+        DepartmentBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DeparmentBoxActionPerformed(evt);
+                DepartmentBoxActionPerformed(evt);
             }
         });
 
@@ -219,13 +219,6 @@ public class PrincipalInterface extends javax.swing.JFrame {
             }
         });
 
-        GraphicTipeBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "----", "Torta", "Barras", "Puntos", "Orizontal" }));
-        GraphicTipeBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GraphicTipeBoxActionPerformed(evt);
-            }
-        });
-
         Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -239,10 +232,10 @@ public class PrincipalInterface extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(Table);
 
-        jButton1.setText("Limpiar Filtros ");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        CleanFilters.setText("Limpiar Filtros ");
+        CleanFilters.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                CleanFiltersActionPerformed(evt);
             }
         });
 
@@ -253,6 +246,28 @@ public class PrincipalInterface extends javax.swing.JFrame {
         jLabel3.setText("Mes");
 
         jLabel4.setText("Sexo");
+
+        jLabel5.setText("Tipo de graficas:");
+
+        TipeBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Picos", "Barras", "Relieve" }));
+        TipeBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TipeBoxActionPerformed(evt);
+            }
+        });
+
+        Panel.setBorder(new javax.swing.border.MatteBorder(null));
+
+        javax.swing.GroupLayout PanelLayout = new javax.swing.GroupLayout(Panel);
+        Panel.setLayout(PanelLayout);
+        PanelLayout.setHorizontalGroup(
+            PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 662, Short.MAX_VALUE)
+        );
+        PanelLayout.setVerticalGroup(
+            PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 375, Short.MAX_VALUE)
+        );
 
         jMenu3.setText("File");
 
@@ -287,14 +302,10 @@ public class PrincipalInterface extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
+                        .addGap(1, 1, 1)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
@@ -303,46 +314,59 @@ public class PrincipalInterface extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(MonthBox, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(DeparmentBox, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(DepartmentBox, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BirthPlaceBox, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(SexBox, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(28, 28, 28)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(46, 46, 46)
-                                .addComponent(jLabel4)))))
-                .addContainerGap(528, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(GraphicTipeBox, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+                                .addComponent(jLabel4))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BirthPlaceBox, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(SexBox, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(CleanFilters)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(TipeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(GraphicTipeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(MonthBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DeparmentBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BirthPlaceBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SexBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(jButton1)
-                .addGap(131, 131, 131))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(MonthBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(DepartmentBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BirthPlaceBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SexBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(CleanFilters))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TipeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         pack();
@@ -357,62 +381,92 @@ public class PrincipalInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void SexBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SexBoxActionPerformed
-        int sex = SexBox.getSelectedIndex();
-        ArrayList aux = filter.Sex(sex, dataBirths.FilteredData);
-        dataBirths.FilteredData = aux;
-        SetToTable();
+        if(SexBox.getSelectedIndex()!=0){
+            flagSex = true ;
+            counter2++;
+            int sex = SexBox.getSelectedIndex();
+            ArrayList aux = filter.Sex(sex, dataBirths.FilteredData);
+            dataBirths.FilteredData = aux;
+            SetToTable();
+        }
     }//GEN-LAST:event_SexBoxActionPerformed
 
-    private void GraphicTipeBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GraphicTipeBoxActionPerformed
-        int Tipe = GraphicTipeBox.getSelectedIndex();
-        switch(Tipe) {
-            case 0:
-                break;
-            case 1:
-                break;
-             case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;   
-        }
-    }//GEN-LAST:event_GraphicTipeBoxActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void CleanFiltersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CleanFiltersActionPerformed
         dataBirths.FilteredData = dataBirths.DataList;
+        flagMonths = false ;
+        flagPlaces=false ;
+        flagDepartments=false;
+        flagSex = false ;
+        MonthBox.setSelectedIndex(0);
+        DepartmentBox.setSelectedIndex(0);
+        BirthPlaceBox.setSelectedIndex(0);
+        SexBox.setSelectedIndex(0);
+        chartPanel.removeAll();
         counter = 0;
+        counter2 = 0;
         SetToTable();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_CleanFiltersActionPerformed
 
     private void BirthPlaceBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BirthPlaceBoxActionPerformed
-        int place = BirthPlaceBox.getSelectedIndex();
-        String [] Brirths = {"0","1","2","3","9"};
-        String [] fetales1 = {"0","1","2","3","4","5","6","9"};
-        if(Value == 0){
-        ArrayList aux = filter.Place(Brirths ,place, dataBirths.FilteredData);
-        dataBirths.FilteredData = aux;
+        if(BirthPlaceBox.getSelectedIndex()!=0){
+            flagPlaces = true;
+            counter2++;
+            int place = BirthPlaceBox.getSelectedIndex();
+            String [] Brirths = {"0","1","2","3","9"};
+            String [] fetales1 = {"0","1","2","3","4","5","6","9"};
+            if(Value == 0){
+            ArrayList aux = filter.Place(Brirths ,place, dataBirths.FilteredData);
+            dataBirths.FilteredData = aux;
+            BirthsDeats = true;
+            }
+            else{
+            ArrayList aux = filter.Place(fetales1 ,place, dataBirths.FilteredData);
+            dataBirths.FilteredData = aux;
+            }
+            SetToTable();
         }
-        else{
-        ArrayList aux = filter.Place(fetales1 ,place, dataBirths.FilteredData);
-        dataBirths.FilteredData = aux;
-        }
-        SetToTable();
     }//GEN-LAST:event_BirthPlaceBoxActionPerformed
 
     private void MonthBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MonthBoxActionPerformed
-        int month = MonthBox.getSelectedIndex();
-        ArrayList aux = filter.Month(month, dataBirths.FilteredData);
-        dataBirths.FilteredData = aux;
-        SetToTable();
+        if(MonthBox.getSelectedIndex()!=0){
+            flagMonths=true;
+            counter2++;
+            int month = MonthBox.getSelectedIndex();
+            ArrayList aux = filter.Month(month, dataBirths.FilteredData);
+            dataBirths.FilteredData = aux;
+            SetToTable();
+        }
     }//GEN-LAST:event_MonthBoxActionPerformed
 
-    private void DeparmentBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeparmentBoxActionPerformed
-        int deparment = DeparmentBox.getSelectedIndex();
-        ArrayList aux = filter.Deparment(deparment, dataBirths.FilteredData);
-        dataBirths.FilteredData = aux;
-        SetToTable();
-    }//GEN-LAST:event_DeparmentBoxActionPerformed
+    private void DepartmentBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DepartmentBoxActionPerformed
+        if(DepartmentBox.getSelectedIndex()!=0){
+            flagDepartments = true ;
+            counter2++;
+            int deparment = DepartmentBox.getSelectedIndex();
+            ArrayList aux = filter.Deparment(deparment, dataBirths.FilteredData);
+            dataBirths.FilteredData = aux;
+            SetToTable();
+        }
+    }//GEN-LAST:event_DepartmentBoxActionPerformed
+
+    private void TipeBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TipeBoxActionPerformed
+        Tipe = TipeBox.getSelectedIndex();
+        System.out.println(counter2);
+        if (counter2 != 3 || Tipe == 0 )
+            JOptionPane.showConfirmDialog(this, "Debe seleccionar 3 filtros o un tipo de gráfica");
+        else{
+            int aux = 0;
+            if(flagMonths == false )aux = 0;
+            if(flagDepartments== false )aux = 1;
+            if(flagPlaces == false )aux = 2;
+            if(flagSex == false )aux = 3;
+            chartPanel=new ChartPanel(graphic.DoGraphic(Tipe, aux,dataBirths.FilteredData,BirthsDeats));
+            Panel.removeAll();
+            Panel.setLayout(new BorderLayout());
+            Panel.add(chartPanel,BorderLayout.CENTER);
+            Panel.validate();
+        }
+    }//GEN-LAST:event_TipeBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -451,17 +505,19 @@ public class PrincipalInterface extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> BirthPlaceBox;
-    private javax.swing.JComboBox<String> DeparmentBox;
-    private javax.swing.JComboBox<String> GraphicTipeBox;
+    private javax.swing.JButton CleanFilters;
+    private javax.swing.JComboBox<String> DepartmentBox;
     private javax.swing.JComboBox<String> MonthBox;
+    private javax.swing.JPanel Panel;
     private javax.swing.JComboBox<String> SexBox;
     private javax.swing.JTable Table;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> TipeBox;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
