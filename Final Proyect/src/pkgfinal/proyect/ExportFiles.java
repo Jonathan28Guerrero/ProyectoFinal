@@ -40,7 +40,7 @@ public class ExportFiles {
         }
     }
     public void ExportImage(JPanel Panel){
-        BufferedImage imagen = new BufferedImage(664, 377, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage imagen = new BufferedImage(750, 400, BufferedImage.TYPE_INT_ARGB);
         Panel.paint(imagen.getGraphics());
         JFileChooser SelectPath = new JFileChooser();
         int Result = SelectPath.showOpenDialog(null);
