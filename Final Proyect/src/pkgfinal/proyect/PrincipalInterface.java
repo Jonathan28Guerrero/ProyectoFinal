@@ -94,26 +94,28 @@ public class PrincipalInterface extends javax.swing.JFrame {
                 columns[1] =0;
                 columns[2] =3;
                 columns[3] =5;
+                BirthsDeats = true;
                 break;
             case 1:
                 columns[0] =7;
                 columns[1] =0;
                 columns[2] =3;
                 columns[3] =10;
+                BirthsDeats = false;
                 break;
             case 2:
                 columns[0] =7;
                 columns[1] =0;
                 columns[2] =3;
                 columns[3] =10;
+                BirthsDeats = false;
                 break;
         }
         JFileChooser SelectFile = new JFileChooser();
-        FileNameExtensionFilter Filter = new FileNameExtensionFilter("Archvos de texto", "csv");
+        FileNameExtensionFilter Filter = new FileNameExtensionFilter("Archvos de CSV", "csv");
         SelectFile.setFileFilter(Filter);
         int Result = SelectFile.showOpenDialog(this);
         fileSelected = SelectFile.getSelectedFile();
-        
         try {
            births = fileData.CreateList(fileSelected, columns);
            dataBirths.Data((births));
@@ -189,7 +191,6 @@ public class PrincipalInterface extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -319,9 +320,6 @@ public class PrincipalInterface extends javax.swing.JFrame {
         jMenu3.add(jMenuItem3);
 
         jMenuBar2.add(jMenu3);
-
-        jMenu4.setText("Edit");
-        jMenuBar2.add(jMenu4);
 
         setJMenuBar(jMenuBar2);
 
@@ -457,13 +455,13 @@ public class PrincipalInterface extends javax.swing.JFrame {
             String [] Brirths = {"0","1","2","3","9"};
             String [] fetales1 = {"0","1","2","3","4","5","6","9"};
             if(Value == 0){
-            ArrayList aux = filter.Place(Brirths ,place, dataBirths.FilteredData);
-            dataBirths.FilteredData = aux;
-            BirthsDeats = true;
+                ArrayList aux = filter.Place(Brirths ,place, dataBirths.FilteredData);
+                dataBirths.FilteredData = aux;
+
             }
             else{
-            ArrayList aux = filter.Place(fetales1 ,place, dataBirths.FilteredData);
-            dataBirths.FilteredData = aux;
+                ArrayList aux = filter.Place(fetales1 ,place, dataBirths.FilteredData);
+                dataBirths.FilteredData = aux;
             }
             SetToTable();
         }
@@ -598,7 +596,6 @@ public class PrincipalInterface extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;

@@ -54,8 +54,8 @@ public class Graphics {
                     dataSet = Departments(Data) ;
                     break;
                 case 2:
-                    if (BirthsDead == true)dataSet = Places1(Data) ;
-                    else dataSet = Places(Data) ;
+                    if (BirthsDead == true)dataSet = Places(Data) ;
+                    else dataSet = Places1(Data) ;
                     break;
                 case 3:
                     dataSet = Sex(Data) ;
@@ -266,14 +266,14 @@ public class Graphics {
                     list = TopMonths(Data) ;
                     break;
                 case 1:
-                    list = TopMonths(Data) ;
+                    list = TopDepartments(Data) ;
                     break;
                 case 2:
-                    if (BirthsDead == true)list = TopMonths(Data) ;
-                    else list = TopMonths(Data) ;
+                    if (BirthsDead == true)list = TopPlace1(Data);
+                    else list = TopPlace2(Data);
                     break;
                 case 3:
-                    list = TopMonths(Data) ;
+                    list = TopSex(Data) ;
                     break;
         }
         return list;
@@ -298,114 +298,343 @@ public class Graphics {
               if (NewDates == 11)noviembre++;
               if (NewDates == 12)diciembre++;
           }
+          ArrayList months = new ArrayList();
+          months.add(enero);
+          months.add(febrero);
+          months.add(marzo);
+          months.add(abril);
+          months.add(mayo);
+          months.add(junio);
+          months.add(julio);
+          months.add(agosto);
+          months.add(septiembre);
+          months.add(octubre);
+          months.add(noviembre);
+          months.add(diciembre);
           ArrayList aux = new ArrayList();
           int top1 = 0, top2 = 0, top3 = 0;
           String Top1 = "", Top2 = "", Top3 = "";
-          for (int i=0; i<=12; i++){
-            if(enero > top1){
-                top3 = top2;
-                Top3 = Top2;
-                top2 = top1;
-                Top2 = Top1;
-                top1 = enero;
-                Top1 = "Enero";
-            }
-            if(febrero > top1){
-                top3 = top2;
-                Top3 = Top2;
-                top2 = top1;
-                Top2 = Top1;
-                top1 = febrero;
-                Top1 = "Febrero";
-            }
-            if(marzo > top1){
-                top3 = top2;
-                Top3 = Top2;
-                top2 = top1;
-                Top2 = Top1;
-                top1 = marzo;
-                Top1 = "Marzo";
-            }
-            if(abril > top1){
-                top3 = top2;
-                Top3 = Top2;
-                top2 = top1;
-                Top2 = Top1;
-                top1 = abril;
-                Top1 = "Abril";
-            }
-            if(mayo > top1){
-                top3 = top2;
-                Top3 = Top2;
-                top2 = top1;
-                Top2 = Top1;
-                top1 = mayo;
-                Top1 = "Mayo";
-            }
-            if(junio > top1){
-                top3 = top2;
-                Top3 = Top2;
-                top2 = top1;
-                Top2 = Top1;
-                top1 = junio;
-                Top1 = "Junio";
-            }
-            if(julio > top1){
-                top3 = top2;
-                Top3 = Top2;
-                top2 = top1;
-                Top2 = Top1;
-                top1 = julio;
-                Top1 = "Julio";
-            }
-            if(agosto > top1){
-                top3 = top2;
-                Top3 = Top2;
-                top2 = top1;
-                Top2 = Top1;
-                top1 = agosto;
-                Top1 = "Agosto";
-            }
-            if(septiembre > top1){
-                top3 = top2;
-                Top3 = Top2;
-                top2 = top1;
-                Top2 = Top1;
-                top1 = septiembre;
-                Top1 = "Septiembre";
-            }
-            if(octubre > top1){
-                top3 = top2;
-                Top3 = Top2;
-                top2 = top1;
-                Top2 = Top1;
-                top1 = octubre;
-                Top1 = "Octubre";
-            }
-            if(noviembre > top1){
-                top3 = top2;
-                Top3 = Top2;
-                top2 = top1;
-                Top2 = Top1;
-                top1 = noviembre;
-                Top1 = "Noviembre";
-            }
-            if(diciembre > top1){
-                top3 = top2;
-                Top3 = Top2;
-                top2 = top1;
-                Top2 = Top1;
-                top1 = diciembre;
-                Top1 = "Diciembre";
-            }
+          for (int i=0; i<13; i++){
+              for(int j=0; j<12; j++){
+                  if((int) months.get(j) > top1)
+                    top1 = (int) months.get(j);
+                  if(((int) months.get(j) < top1) && ((int) months.get(j) > top3) && ((int) months.get(j) > top2))
+                    top2 = (int) months.get(j);
+                  if(((int) months.get(j) < top1) && ((int) months.get(j) < top2) && ((int) months.get(j) > top3))
+                    top3 = (int) months.get(j);
+              }
           }
+          Top1 = NamesMonths(top1, months);
+          Top2 = NamesMonths(top2, months);
+          Top3 = NamesMonths(top3, months);
           aux.add(Top1);
           aux.add(top1);
           aux.add(Top2);
           aux.add(top2);
           aux.add(Top3);
           aux.add(top3);
-           return aux;
+          return aux;
+    }
+    public String NamesMonths(int top, ArrayList list){
+        if((int) list.get(0) == top) return "Enero";
+        if((int) list.get(1) == top) return "Febrero";
+        if((int) list.get(2) == top) return "Marzo";
+        if((int) list.get(3) == top) return "Abril";
+        if((int) list.get(4) == top) return "Mayo";
+        if((int) list.get(5) == top) return "Junio";
+        if((int) list.get(6) == top) return "Julio";
+        if((int) list.get(7) == top) return "Agosto";
+        if((int) list.get(8) == top) return "Septiembre";
+        if((int) list.get(9) == top) return "Octubre";
+        if((int) list.get(10) == top) return "Noviembre";
+        if((int) list.get(11) == top) return "Diciembre";
+        return "";
+    }
+    public ArrayList TopDepartments(ArrayList Datos_dep){
+        int antioquia = 0,atlantico = 0,barranquilla=0,bogota=0,bolivar=0,boyaca=0,calda=0,
+        caqueta=0,cauca=0,cesar=0,cordova=0,cundinamarca=0,choco=0,
+        huila=0,guajira=0,magdalena=0,meta=0,nariño=0,nortsant=0,
+        quindio=0,risaralda=0,santander=0,sucre=0,tolima=0,
+        valle=0,arauca=0,casanare=0,putumayo=0,sanandres=0,
+        amazonas=0,guainia=0,guaviare=0,vaupes=0,vichada=0;
+        for(int i=0;i<Datos_dep.size();i++){
+            ArrayList aux = (ArrayList) Datos_dep.get(i);
+            String datos = String.valueOf(aux.get(1));
+               int NewDates = Integer.parseInt(datos);
+                if (NewDates == 05)antioquia++;
+                if (NewDates == 8)atlantico++;
+                if (NewDates == 11)bogota++;
+                if (NewDates == 13)bolivar++;
+                if (NewDates == 15)boyaca++;
+                if (NewDates == 17)calda++;
+                if (NewDates == 18)caqueta++;
+                if (NewDates == 19)cauca++;
+                if (NewDates == 20)cesar++;
+                if (NewDates == 23)cordova++;
+                if (NewDates == 25)cundinamarca++;
+                if (NewDates == 27)choco++;
+                if (NewDates == 41)huila++;
+                if (NewDates == 44)guajira++;
+                if (NewDates == 47)magdalena++;
+                if (NewDates == 50)meta++;
+                if (NewDates == 52)nariño++;
+                if (NewDates == 54)nortsant++;
+                if (NewDates == 63)quindio++;
+                if (NewDates == 66)risaralda++;
+                if (NewDates == 68)santander++;
+                if (NewDates == 70)sucre++;
+                if (NewDates == 73)tolima++;
+                if (NewDates == 76)valle++;
+                if (NewDates == 81)arauca++;
+                if (NewDates == 85)casanare++;
+                if (NewDates == 86)putumayo++;
+                if (NewDates == 88)sanandres++;
+                if (NewDates == 91)amazonas++;
+                if (NewDates == 94)guainia++;
+                if (NewDates == 95)guaviare++;
+                if (NewDates == 97)vaupes++;
+                if (NewDates == 99)vichada++;
+            }
+        ArrayList departments = new ArrayList();
+        departments.add(antioquia);
+        departments.add(atlantico);
+        departments.add(bogota);
+        departments.add(bolivar);
+        departments.add(boyaca);
+        departments.add(calda);
+        departments.add(caqueta);
+        departments.add(cauca);
+        departments.add(cesar);
+        departments.add(cordova);
+        departments.add(cundinamarca);
+        departments.add(choco);
+        departments.add(huila);
+        departments.add(guajira);
+        departments.add(magdalena);
+        departments.add(meta);
+        departments.add(nariño);
+        departments.add(nortsant);
+        departments.add(quindio);
+        departments.add(risaralda);
+        departments.add(santander);
+        departments.add(sucre);
+        departments.add(tolima);
+        departments.add(valle);
+        departments.add(arauca);
+        departments.add(casanare);
+        departments.add(putumayo);
+        departments.add(sanandres);
+        departments.add(amazonas);
+        departments.add(guainia);
+        departments.add(guaviare);
+        departments.add(vaupes);
+        departments.add(vichada);
+          ArrayList aux = new ArrayList();
+          int top1 = 0, top2 = 0, top3 = 0;
+          String Top1 = "", Top2 = "", Top3 = "";
+          for (int i=0; i<33; i++){
+              for(int j=0; j<33; j++){
+                  if((int) departments.get(j) > top1)
+                    top1 = (int) departments.get(j);
+                  if(((int) departments.get(j) < top1) && ((int) departments.get(j) > top3) && ((int) departments.get(j) > top2))
+                    top2 = (int) departments.get(j);
+                  if(((int) departments.get(j) < top1) && ((int) departments.get(j) < top2) && ((int) departments.get(j) > top3))
+                    top3 = (int) departments.get(j);
+              }
+          }
+          Top1 = NamesDepartments(top1, departments);
+          Top2 = NamesDepartments(top2, departments);
+          Top3 = NamesDepartments(top3, departments);
+          aux.add(Top1);
+          aux.add(top1);
+          aux.add(Top2);
+          aux.add(top2);
+          aux.add(Top3);
+          aux.add(top3);
+          return aux;
+    }
+    public String NamesDepartments(int top, ArrayList list){
+                if (top == (int) list.get(0)) return "Antioquia";
+                if (top == (int) list.get(1)) return "Atlantico";
+                if (top == (int) list.get(2)) return "Bogotá";
+                if (top == (int) list.get(3)) return "Bolivar";
+                if (top == (int) list.get(4)) return "Boyacá";
+                if (top == (int) list.get(5)) return "Caldas";
+                if (top == (int) list.get(6)) return "Caquetá";
+                if (top == (int) list.get(7)) return "Cauca";
+                if (top == (int) list.get(8)) return "Cesar";
+                if (top == (int) list.get(9)) return "Cordoba";
+                if (top == (int) list.get(10)) return "Cundinamarca";
+                if (top == (int) list.get(11)) return "Chocó";
+                if (top == (int) list.get(12)) return "Huila";
+                if (top == (int) list.get(13)) return "Guajira";
+                if (top == (int) list.get(14)) return "Magdalena";
+                if (top == (int) list.get(15)) return "Meta";
+                if (top == (int) list.get(16)) return "Nariño";
+                if (top == (int) list.get(17)) return "Norte de Santander";
+                if (top == (int) list.get(18)) return "Quindio";
+                if (top == (int) list.get(19)) return "Risaralda";
+                if (top == (int) list.get(20)) return "Santander";
+                if (top == (int) list.get(21)) return "Sucre";
+                if (top == (int) list.get(22)) return "Tolima";
+                if (top == (int) list.get(23)) return "Valle";
+                if (top == (int) list.get(24)) return "Arauca";
+                if (top == (int) list.get(25)) return "Casanare";
+                if (top == (int) list.get(26)) return "Putumayo";
+                if (top == (int) list.get(27)) return "San Andres";
+                if (top == (int) list.get(28)) return "Amazonas";
+                if (top == (int) list.get(29)) return "Guainia";
+                if (top == (int) list.get(30)) return "Guaviare";
+                if (top == (int) list.get(31)) return "Vaupes";
+                if (top == (int) list.get(32)) return "Vichada";
+                return "";
+    }
+    public ArrayList TopPlace1(ArrayList Datos_sit){
+            int Hospital = 0, Domicilio = 0 , Otro = 0 ,Sin_información = 0;
+            for(int i=0;i<Datos_sit.size();i++){
+                ArrayList aux = (ArrayList) Datos_sit.get(i);
+                String datos = String.valueOf(aux.get(2));
+                int NewDates = Integer.parseInt(datos);
+                if (NewDates == 1) Hospital++; 
+                if (NewDates == 2) Domicilio++;
+                if (NewDates == 3) Otro++;
+                if (NewDates == 9) Sin_información++;
+            }
+            ArrayList place = new ArrayList();
+            place.add(Hospital);
+            place.add(Domicilio);
+            place.add(Otro);
+            place.add(Sin_información);
+            ArrayList aux = new ArrayList();
+            int top1 = 0, top2 = 0, top3 = 0;
+            String Top1 = "", Top2 = "", Top3 = "";
+            for (int i=0; i<4; i++){
+                for(int j=0; j<4; j++){
+                  if((int) place.get(j) > top1)
+                    top1 = (int) place.get(j);
+                  if(((int) place.get(j) < top1) && ((int) place.get(j) > top3) && ((int) place.get(j) > top2))
+                    top2 = (int) place.get(j);
+                  if(((int) place.get(j) < top1) && ((int) place.get(j) < top2) && ((int) place.get(j) > top3))
+                    top3 = (int) place.get(j);
+                }
+            }
+            Top1 = NamesPlace(top1, place);
+            Top2 = NamesPlace(top2, place);
+            Top3 = NamesPlace(top3, place);
+            aux.add(Top1);
+            aux.add(top1);
+            aux.add(Top2);
+            aux.add(top2);
+            aux.add(Top3);
+            aux.add(top3);
+            return aux;
+    }
+    public String NamesPlace(int top, ArrayList list){
+        if (top == (int) list.get(0)) return "Institución de salud";
+        if (top == (int) list.get(1)) return "Domicilio";
+        if (top == (int) list.get(2)) return "Otro";
+        if (top == (int) list.get(3)) return "Sin Información";
+        return "";
+    }
+    public ArrayList TopPlace2(ArrayList Datos_sit){
+            int Hospital_Clínica = 0, Centro_PuestoDeSalud = 0,CasaDomicilio = 0, Lugar_de_trabajo = 0 ,Vía_pública = 0, Otro = 0 ,Sin_información = 0;
+            for(int i=0;i<Datos_sit.size();i++){
+            ArrayList aux = (ArrayList) Datos_sit.get(i);
+            String datos = String.valueOf(aux.get(2));
+               int NewDates = Integer.parseInt(datos);
+                    if (NewDates == 1 ) Hospital_Clínica++; 
+                    if (NewDates == 2) Centro_PuestoDeSalud++; 
+                    if (NewDates == 3) CasaDomicilio++; 
+                    if (NewDates == 4) Lugar_de_trabajo++; 
+                    if (NewDates == 5) Vía_pública++; 
+                    if (NewDates == 6) Otro++; 
+                    if (NewDates == 9) Sin_información++;
+            }
+            ArrayList place = new ArrayList();
+            place.add(Hospital_Clínica);
+            place.add(Centro_PuestoDeSalud);
+            place.add(CasaDomicilio);
+            place.add(Lugar_de_trabajo);
+            place.add(Vía_pública);
+            place.add(Otro);
+            place.add(Sin_información);
+            ArrayList aux = new ArrayList();
+            int top1 = 0, top2 = 0, top3 = 0;
+            String Top1 = "", Top2 = "", Top3 = "";
+            for (int i=0; i<7; i++){
+                for(int j=0; j<7; j++){
+                  if((int) place.get(j) > top1)
+                    top1 = (int) place.get(j);
+                  if(((int) place.get(j) < top1) && ((int) place.get(j) > top3) && ((int) place.get(j) > top2))
+                    top2 = (int) place.get(j);
+                  if(((int) place.get(j) < top1) && ((int) place.get(j) < top2) && ((int) place.get(j) > top3))
+                    top3 = (int) place.get(j);
+                }
+            }
+            Top1 = NamesPlace2(top1, place);
+            Top2 = NamesPlace2(top2, place);
+            Top3 = NamesPlace2(top3, place);
+            aux.add(Top1);
+            aux.add(top1);
+            aux.add(Top2);
+            aux.add(top2);
+            aux.add(Top3);
+            aux.add(top3);
+            return aux;
+    }
+    public String NamesPlace2(int top, ArrayList list){
+        if (top == (int) list.get(0)) return "Hospital/Clínica";
+        if (top == (int) list.get(1)) return "Centro de salud";
+        if (top == (int) list.get(2)) return "Casa/Domicilio";
+        if (top == (int) list.get(3)) return "Lugar de trabajo";
+        if (top == (int) list.get(4)) return "Vía pública";
+        if (top == (int) list.get(5)) return "Otro";
+        if (top == (int) list.get(6)) return "Sin información";
+        return "";
+    }
+    public ArrayList TopSex(ArrayList Datos_sexo){
+        int Masculino=0,Femenino=0,Indeterminado=0;
+        for(int i=0;i<Datos_sexo.size();i++){
+            ArrayList aux = (ArrayList) Datos_sexo.get(i);
+            String datos = String.valueOf(aux.get(3));
+            int NewDates = Integer.parseInt(datos);
+            if (NewDates ==1) Masculino++;
+            if (NewDates ==2) Femenino++;
+            if (NewDates ==3) Indeterminado++;
+        }
+        ArrayList place = new ArrayList();
+        place.add(Masculino);
+        place.add(Femenino);
+        place.add(Indeterminado);
+        ArrayList aux = new ArrayList();
+        int top1 = 0, top2 = 0, top3 = 0;
+        String Top1 = "", Top2 = "", Top3 = "";
+        for (int i=0; i<3; i++){
+            for(int j=0; j<3; j++){
+                  if((int) place.get(j) > top1)
+                    top1 = (int) place.get(j);
+                  if(((int) place.get(j) < top1) && ((int) place.get(j) > top3) && ((int) place.get(j) > top2))
+                    top2 = (int) place.get(j);
+                  if(((int) place.get(j) < top1) && ((int) place.get(j) < top2) && ((int) place.get(j) > top3))
+                    top3 = (int) place.get(j);
+                }
+            }
+        Top1 = NamesSex(top1, place);
+        Top2 = NamesSex(top2, place);
+        Top3 = NamesSex(top3, place);
+        aux.add(Top1);
+        aux.add(top1);
+        aux.add(Top2);
+        aux.add(top2);
+        aux.add(Top3);
+        aux.add(top3);
+        return aux;
+    }
+    public String NamesSex(int top, ArrayList list){
+        if (top == (int) list.get(0)) return "Masculino";
+        if (top == (int) list.get(1)) return "Femenino";
+        if (top == (int) list.get(2)) return "Indeterminado";
+        return "";
     }
     }
 
