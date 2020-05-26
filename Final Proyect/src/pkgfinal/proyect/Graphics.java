@@ -27,7 +27,7 @@ public class Graphics {
         if (column==0)xname = "Meses";
         if (column==1)xname = "Departamentos";
         if (column==2)xname = "Sitios";
-        if (column==3)xname = "Lugares";
+        if (column==3)xname = "Sexo";
         if(Tipe == 1){
             JFreeChart chart = ChartFactory.createAreaChart(xname, xname, "Cantidad", SelectDataPie(Data,column,BirthsDead));
             return (chart); 
@@ -255,6 +255,157 @@ public class Graphics {
         maindataset.setValue(Indeterminado, String.valueOf(Indeterminado), "Indeterminado");
         return  maindataset;
     }
-
+    
+    
+    
+    public ArrayList SelectTop(ArrayList Data, int aux, boolean BirthsDead){
+        
+        ArrayList list = new ArrayList();
+        switch(aux){
+                case 0 :
+                    list = TopMonths(Data) ;
+                    break;
+                case 1:
+                    list = TopMonths(Data) ;
+                    break;
+                case 2:
+                    if (BirthsDead == true)list = TopMonths(Data) ;
+                    else list = TopMonths(Data) ;
+                    break;
+                case 3:
+                    list = TopMonths(Data) ;
+                    break;
+        }
+        return list;
+        
+    }
+    public ArrayList TopMonths(ArrayList Datos_meses){
+           int enero = 0, febrero = 0,marzo = 0,abril= 0,mayo= 0,junio= 0,julio= 0,agosto= 0,septiembre= 0,octubre= 0,noviembre= 0,diciembre= 0; 
+          for(int i=0;i<Datos_meses.size();i++){
+              ArrayList aux = (ArrayList) Datos_meses.get(i);   
+              String datos = String.valueOf(aux.get(0));
+              int NewDates = Integer.parseInt(datos);
+              if (NewDates == 01)enero++;  
+              if (NewDates == 02)febrero++;
+              if (NewDates == 03)marzo++;
+              if (NewDates == 04)abril++;
+              if (NewDates == 05)mayo++;
+              if (NewDates == 06)junio++;
+              if (NewDates == 07)julio++;
+              if (NewDates == 8)agosto++;
+              if (NewDates == 9)septiembre++;
+              if (NewDates == 10)octubre++;
+              if (NewDates == 11)noviembre++;
+              if (NewDates == 12)diciembre++;
+          }
+          ArrayList aux = new ArrayList();
+          int top1 = 0, top2 = 0, top3 = 0;
+          String Top1 = "", Top2 = "", Top3 = "";
+          for (int i=0; i<=12; i++){
+            if(enero > top1){
+                top3 = top2;
+                Top3 = Top2;
+                top2 = top1;
+                Top2 = Top1;
+                top1 = enero;
+                Top1 = "Enero";
+            }
+            if(febrero > top1){
+                top3 = top2;
+                Top3 = Top2;
+                top2 = top1;
+                Top2 = Top1;
+                top1 = febrero;
+                Top1 = "Febrero";
+            }
+            if(marzo > top1){
+                top3 = top2;
+                Top3 = Top2;
+                top2 = top1;
+                Top2 = Top1;
+                top1 = marzo;
+                Top1 = "Marzo";
+            }
+            if(abril > top1){
+                top3 = top2;
+                Top3 = Top2;
+                top2 = top1;
+                Top2 = Top1;
+                top1 = abril;
+                Top1 = "Abril";
+            }
+            if(mayo > top1){
+                top3 = top2;
+                Top3 = Top2;
+                top2 = top1;
+                Top2 = Top1;
+                top1 = mayo;
+                Top1 = "Mayo";
+            }
+            if(junio > top1){
+                top3 = top2;
+                Top3 = Top2;
+                top2 = top1;
+                Top2 = Top1;
+                top1 = junio;
+                Top1 = "Junio";
+            }
+            if(julio > top1){
+                top3 = top2;
+                Top3 = Top2;
+                top2 = top1;
+                Top2 = Top1;
+                top1 = julio;
+                Top1 = "Julio";
+            }
+            if(agosto > top1){
+                top3 = top2;
+                Top3 = Top2;
+                top2 = top1;
+                Top2 = Top1;
+                top1 = agosto;
+                Top1 = "Agosto";
+            }
+            if(septiembre > top1){
+                top3 = top2;
+                Top3 = Top2;
+                top2 = top1;
+                Top2 = Top1;
+                top1 = septiembre;
+                Top1 = "Septiembre";
+            }
+            if(octubre > top1){
+                top3 = top2;
+                Top3 = Top2;
+                top2 = top1;
+                Top2 = Top1;
+                top1 = octubre;
+                Top1 = "Octubre";
+            }
+            if(noviembre > top1){
+                top3 = top2;
+                Top3 = Top2;
+                top2 = top1;
+                Top2 = Top1;
+                top1 = noviembre;
+                Top1 = "Noviembre";
+            }
+            if(diciembre > top1){
+                top3 = top2;
+                Top3 = Top2;
+                top2 = top1;
+                Top2 = Top1;
+                top1 = diciembre;
+                Top1 = "Diciembre";
+            }
+          }
+          aux.add(Top1);
+          aux.add(top1);
+          aux.add(Top2);
+          aux.add(top2);
+          aux.add(Top3);
+          aux.add(top3);
+           return aux;
+    }
     }
 
