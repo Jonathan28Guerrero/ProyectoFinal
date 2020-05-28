@@ -382,7 +382,7 @@ public class PrincipalInterface extends javax.swing.JFrame {
         getContentPane().add(jLabel7);
         jLabel7.setBounds(30, 20, 1220, 40);
 
-        jMenu3.setText("File");
+        jMenu3.setText("Archivo");
 
         jMenuItem1.setText("Nuevo");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -423,7 +423,7 @@ public class PrincipalInterface extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenu3);
 
-        jMenu4.setText("Codigo de departamentos");
+        jMenu4.setText("Código de departamentos");
 
         jMenuItem9.setText("05. Antioquia");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {

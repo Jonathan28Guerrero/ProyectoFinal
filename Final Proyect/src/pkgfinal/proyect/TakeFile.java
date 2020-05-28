@@ -16,9 +16,9 @@ import java.util.Scanner;
  */
 public class TakeFile {
     
-    public ArrayList CreateList(File FileStudents, int[] columns) throws FileNotFoundException{
+    public ArrayList CreateList(File file, int[] columns) throws FileNotFoundException{
         ArrayList FileData = new ArrayList();
-        try(Scanner ScanFile = new Scanner(FileStudents)){
+        try(Scanner ScanFile = new Scanner(file)){
             while (ScanFile.hasNextLine()){
                 ArrayList aux = new ArrayList();
                 ArrayList Values = Columns(ScanFile.nextLine());
